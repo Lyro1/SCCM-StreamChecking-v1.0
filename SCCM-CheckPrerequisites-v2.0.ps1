@@ -968,7 +968,7 @@ p, a, li, ul, h1, h2, h3, h4, h5, table {
 
     <head>
         <title>SCCM Check Prerequisites v2.0 | ' + $date + '</title>
-        <link href="RESSOURCES\favicon_0.ico" rel="icon" type="image/vnd.microsoft.icon">
+        <link href="RESSOURCES\favicon.ico" rel="icon" type="image/vnd.microsoft.icon">
         <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet"> 
         <meta charset="UTF-8">
     </head>
@@ -976,7 +976,7 @@ p, a, li, ul, h1, h2, h3, h4, h5, table {
     <body>
 
         <div class="logo">
-            <img src="https://www.safran-group.com/sites/group/files/logo-safran.png" alt="SAFRAN GROUP">
+            <img src="your-logo-url" alt="your-logo-description">
         </div>
 
         <div class="report-info">
