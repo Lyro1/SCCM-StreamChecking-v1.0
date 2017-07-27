@@ -1,0 +1,202 @@
+<style>
+
+html {
+    width : 100%;
+    margin : 0px;
+    background-color: #d9e4ec;
+}
+
+body {
+	width : 70%;
+	margin : auto;
+}
+
+p, a, li, ul, h1, h2, h3, h4, h5, table {
+    font-family: 'Ubuntu', sans-serif;
+    margin : 0px;
+}
+
+.red {
+	color : red;
+	background-color : rgba(175,0,0,0.15);
+	border-radius : 6px;
+}
+
+.title {
+	margin-top : 50px;
+	font-size : 36px;
+	padding-left : 15px;
+	border-left : 25px solid #2a6496;
+}
+
+.subtitle {	
+	margin-top : 35px;
+	font-size : 20px;
+	padding-left : 15px;
+	border-left : 25px solid #2a6496;
+}
+
+.subtitle2 {	
+	margin-top : 35px;
+	margin-left : 25px;
+	font-size : 16px;
+	padding-left : 25px;
+	border-left : 20px solid #2a6496;
+}
+
+.infos {
+	width : 400px;
+	margin-top : 35px;
+}
+
+.infos .label {
+	width : 170px;
+}
+
+.line-flex {
+	display : flex;
+}
+
+.paragraph {
+	margin-top : 15px;
+	text-align : justify;
+}
+
+.paragraph2 {
+	margin-top : 15px;
+	margin-left : 25px;
+	text-align : justify;
+}
+
+.code {
+	margin-top : 20px;
+	border-radius : 6px;
+	background-color : white;
+	border : 1px solid #ccc;
+	padding : 20px;
+	font-family: 'Source Code Pro', monospace;
+}
+</style>
+
+<html>
+
+    <head>
+        <title>README | SCCM Health Check v4.0</title>
+        <link href="https://www.safran-group.com/sites/group/files/favicon_0.ico" rel="icon" type="image/vnd.microsoft.icon">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Ubuntu" rel="stylesheet"> 
+        <meta charset="ISO-8859-1">
+    </head>
+
+    <body>
+	
+		<h2 class="title">README | SCCM Check Prerequisites v2.0</h2>
+	
+		<div class="infos">
+			<div class="line-flex"><p class="label"># CREATED ON</p><p class="value">: 28/03/2015 11:30</p></div>
+			<div class="line-flex"><p class="label"># CREATED BY</p><p class="value">: Thomas Prudhomme</p></div>
+			<div class="line-flex"><p class="label"># UPDATED BY</p><p class="value">: Louis Dupont</p></div>
+			<div class="line-flex"><p class="label"># UPDATED ON</p><p class="value">: 27/07/17 16:50</p></div>
+			<div class="line-flex"><p class="label"># ORGANIZATION</p><p class="value">: SAFRAN</p></div>
+			<div class="line-flex"><p class="label"># VERSION</p><p class="value">: 2.0</p></div>
+		</div>
+		
+		<h2 class="subtitle">REQUIREMENTS</h2>
+		
+		<p class="paragraph">
+			The script requires a settings.xml file in the same folder as the script. This settings.xml file must follow the template <i>settings-template.xml</i>
+			You can add IP adress and ports to test by following the <i>settings-CHANGEME.png</i> instructions. If for any reasons, the <i>settings.xml</i> seems not to
+			work anymore, try to delete it and replace it with a copy of <i>settings-template.xml</i>, and rename it "settings.xml".
+		</p>
+		
+		<h2 class="subtitle">GENERAL BEHAVIOUR</h2>
+		
+		<p class="paragraph">
+			The script checks the following:</br>
+			<ol>
+				<li>Verify that the computer is connected to internet</li>
+				<li>Verify that the settings.xml script is present</li>
+				<li>Collect data from the current user and the current computer (material configuration and services checking)</li>
+				<li>Proceed to various network checking : 
+				<ul>
+					<li>Primary Server (URL)</li>
+					<li>DP Network (URL and VIP)</li>
+					<li>Active Directory Network (VIP)</li></ul></li>
+				<li>Generation of a .html page that opens and give you a visual report of the checking, with some advices to setup your SCCM network.</li>
+			</ol>
+		</p>
+		
+		<h2 class="subtitle">MODIFY THE CHECKING</h2>
+		
+		<p class="paragraph">
+			The script has been made to be flexible and update-ready. Here are the instructions to update the script in various cases. Be very carefull when you modify some parts
+			of the script. Each list is case sensitive. Don't miss a space or a comma, and don't mistake a comma and a point (comma = , and point = .). You can only modify the <b class="red">
+			red text</b>.</br>
+			
+			<h2 class="subtitle2">Change for your company</h2>
+			
+			<p class="paragraph2">
+			You can add a new company that will be able to run the script. In order to do so, follow the next steps : 
+			<ol>
+				<li>Edit the <i>settings.xml</i> and go to <i>Company</i>. Change for you company name :
+				<p class="code">&lt;Company&gt;<b class="red">My Company Name</b>&lt;/Company&gt;</p>
+				</br></br>
+				<li>Then under <i>Custom</i>, copy and past the following code after the current companies blocks :
+					<p class="code">
+							&lt;PrimaryServer&gt;<b class="red">primary.server</b>&lt;/PrimaryServer&gt;</br>
+							&lt;DPNetwork&gt;</br>
+								&nbsp;&nbsp;&nbsp;&lt;First&gt;</br>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;URL&gt;<b class="red">my.dp.url</b>&lt;/URL&gt;</br>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;DPIPs&gt;<b class="red">00.11.222.333</b>,<b class="red">99.88.777.666</b>&lt;/DPIPs&gt;</br>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ADIPs&gt;<b class="red">01.23.456.789</b>,<b class="red">89.76.543.210</b>&lt;/ADIPs&gt;</br>
+								&nbsp;&nbsp;&nbsp;&lt;/First&gt;</br>
+								&nbsp;&nbsp;&nbsp;<b class="red">&lt;Second&gt;</b></br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</br>
+								&nbsp;&nbsp;&nbsp;<b class="red">&lt;/Second&gt;</b></br>
+							&lt;/DPNetwork&gt;</br>
+					</p>
+					</br>
+				<ul>
+					<li><i>&lt;PrimaryServer&gt;</i> is the unique primary server of the company's site.</li>
+					<li><i>&lt;DPNetwork&gt;&lt;URL&gt;</i> contains the DP URL that will be tested by the script. You can add
+						   an adress to test, you must add a new label &lt;First&gt;&lt;/First&gt;, &lt;Second&gt;&lt;/Second&gt; etc... with all the fields &lt;URL&gt;, &lt;DPIPs&gt;, &lt;ADIPs&gt;</li>
+					<li><i>&lt;DPNetwork&gt;&lt;DPIPs&gt;</i> contains all the DP IPs that will be tested by the script. They must be separed with commas, no space.</li>
+					<li><i>&lt;DPNetwork&gt;&lt;ADIPs&gt;</i> contains all the AD IPs that will be tested by the script. They must be separed with commas, no space.</li>
+				</ul>
+				</li>
+				</li>
+			</ol>
+			</p>
+			
+			<h2 class="subtitle2">Add an IP Address to test</h2>
+			
+			<ol>
+				<li>Edit the <i>settings.xml</i> file, and go into the company which need to test the new IP address.</li>
+				<li>If you want to add a new DP Network IP address, go under <i>DPIPs</i>, and add a new adress following the correct syntax :
+					<p class="code">&lt;DPIPs&gt;...<b class="red">,00.11.222.333</b>&lt;/DPIPs&gt;</p>
+					Add a comma, then your IP adress, and no space nowhere.
+				</li>
+				<li>If you want to add a new Active Directory Network IP address, go under <i>ADIPs</i>, and add a new adress following the correct syntax :
+					<p class="code">&lt;ADIPs&gt;...<b class="red">,00.11.222.333</b>&lt;/ADIPs&gt;</p>
+					Add a comma, then your IP adress, and no space nowhere.
+				</li>
+			</ol>
+			
+			<h2 class="subtitle2">Add a Port to test</h2>
+			
+			<ol>
+				<li>Edit the <i>settings.xml</i> file, and go into the <i>Ports</i> section.</li>
+				<li>If you want to add a new DP port, go under <i>DP</i>, and add a new adress following the correct syntax :
+					<p class="code">&lt;DP&gt;...<b class="red">,666</b>&lt;/DP&gt;</p>
+					Add a comma, then your port, and no space nowhere.
+				</li>
+				<li>If you want to add a new Active Directory port, go under <i>AD</i>, and add a new adress following the correct syntax :
+					<p class="code">&lt;AD&gt;...<b class="red">,666</b>&lt;/AD&gt;</p>
+					Add a comma, then your port, and no space nowhere.
+				</li>
+			</ol>
+			
+		</p>
+		
+	</body>
+	
+</html>
